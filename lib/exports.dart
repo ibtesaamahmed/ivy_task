@@ -25,7 +25,7 @@ export 'package:permission_handler/permission_handler.dart';
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:geolocator/geolocator.dart' hide ServiceStatus;
 export 'package:google_places_flutter/google_places_flutter.dart';
-export 'package:provider/provider.dart';
+export 'package:get/get.dart';
 
 // Models Exports
 export 'package:ivy_task/models/product_model.dart';

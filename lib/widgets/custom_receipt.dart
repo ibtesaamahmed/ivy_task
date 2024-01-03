@@ -7,7 +7,7 @@ class CustomReceipt extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
-    final ordersProvider = Provider.of<OrdersProvider>(context, listen: false);
+    // final ordersProvider = Provider.of<OrdersProvider>(context, listen: false);
 
     return Stack(
       children: [
@@ -43,16 +43,16 @@ class CustomReceipt extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: height * 0.03),
-                Center(
-                  child: Text(
-                    '${ordersProvider.totalPrice.toStringAsFixed(0)} USD',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 46,
-                    ),
-                  ),
-                ),
+                // Center(
+                //   child: Text(
+                //     '${ordersProvider.totalPrice.toStringAsFixed(0)} USD',
+                //     style: const TextStyle(
+                //       color: Colors.white,
+                //       fontWeight: FontWeight.w700,
+                //       fontSize: 46,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: height * 0.02),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: width * 0.05),
@@ -68,30 +68,32 @@ class CustomReceipt extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     color: const Color.fromARGB(255, 226, 225, 225),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            ordersProvider.selectedProduct!.imageUrl),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            ordersProvider.selectedProduct!.title,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(width: width * 0.02),
-                          Text(
-                              'x ${ordersProvider.quantity.toStringAsFixed(0)}'),
-                        ],
-                      ),
-                      Text(
-                        '${ordersProvider.quantity.toStringAsFixed(0)} x ${ordersProvider.selectedProduct!.price.toStringAsFixed(0)} = \$${ordersProvider.totalPrice}',
-                        style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w500),
-                      ),
-                    ],
+                  child: GetBuilder<OrderController>(
+                    builder: (controller) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              controller.selectedProduct!.imageUrl),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              controller.selectedProduct!.title,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: width * 0.02),
+                            Text('x ${controller.quantity.toStringAsFixed(0)}'),
+                          ],
+                        ),
+                        Text(
+                          '${controller.quantity.toStringAsFixed(0)} x ${controller.selectedProduct!.price.toStringAsFixed(0)} = \$${controller.totalPrice}',
+                          style: const TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

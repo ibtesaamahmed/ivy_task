@@ -13,9 +13,11 @@ class _DetailsInputScreenState extends State<DetailsInputScreen> {
     final height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: Padding(
-        padding: const EdgeInsets.only(left: 8, right: 8),
+        padding: const EdgeInsets.only(
+          left: 8,
+          right: 8,
+        ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -121,16 +123,21 @@ class _DetailsInputScreenState extends State<DetailsInputScreen> {
   }
 
   void showAddressBottomSheet(TextEditingController controller) {
-    showModalBottomSheet(
+    Get.bottomSheet(
+      SetAddressBottomSheet(controller: controller),
       isScrollControlled: true,
-      context: context,
       elevation: 10,
-      builder: (BuildContext context) {
-        return SetAddressBottomSheet(
-          controller: controller,
-        );
-      },
     );
+    // showModalBottomSheet(
+    //   isScrollControlled: true,
+    //   context: context,
+    //   elevation: 10,
+    //   builder: (BuildContext context) {
+    //     return SetAddressBottomSheet(
+    //       controller: controller,
+    //     );
+    //   },
+    // );
   }
 
   void openDatePicker() {
@@ -154,28 +161,27 @@ class _DetailsInputScreenState extends State<DetailsInputScreen> {
         addressController.text.isEmpty ||
         _selectedDate == null ||
         isLocationEnabled == false) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'An Error Occured',
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          ),
+      Get.defaultDialog(
+          titlePadding: const EdgeInsets.only(top: 20),
+          contentPadding: const EdgeInsets.all(20),
+          title: 'An Error Occured',
+          titleStyle: TextStyle(color: Theme.of(context).primaryColor),
           content: const Text(
             'Missing Fields',
-            style: TextStyle(color: Colors.black),
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
-          actions: <Widget>[
+          actions: [
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Get.back();
                 },
                 child: const Text(
                   'OK',
                 )),
-          ],
-        ),
-      );
+          ]);
     } else {
       Navigator.pushNamed(context, PlaceOrderScreen.routeName);
     }

@@ -16,8 +16,9 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       appBar: AppBar(
         title: const Text('My Shop'),
       ),
-      body: Consumer<OrdersProvider>(
-        builder: (context, value, _) => Column(
+      body: GetBuilder<OrderController>(
+        init: OrderController(),
+        builder: (value) => Column(
           children: [
             SizedBox(height: height * 0.08),
             const CustomDropdownMenu(),
