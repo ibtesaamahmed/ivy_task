@@ -31,4 +31,4 @@ export 'package:get/get.dart';
 export 'package:ivy_task/models/product_model.dart';
 
 // Providers Exports
-export 'package:ivy_task/providers/orders.dart';
+export 'package:ivy_task/controllers/orders.dart';

@@ -1,1 +1,1 @@
-const googleMapApiKey = 'Your-Api-Key';
+const googleMapApiKey = 'Your-Api Key';
